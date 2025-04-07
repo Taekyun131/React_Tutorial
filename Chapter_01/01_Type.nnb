@@ -99,9 +99,16 @@
             "outputs": []
         },
         {
+            "language": "markdown",
+            "source": [
+                "#### 원시타입 - 불변형태의 값으로 저장, 변수 할당 시점에 메모리 영역을 차지하고 저장"
+            ],
+            "outputs": []
+        },
+        {
             "language": "typescript",
             "source": [
-                "let hello='hello world';\r\nlet hi=hello;\r\nconsole.log(hello===hi);    //true"
+                "// 값을 복사해 전달하는 방식식\r\nlet hello='hello world';\r\nlet hi=hello;\r\nconsole.log(hello===hi);    //true"
             ],
             "outputs": [
                 {
@@ -121,7 +128,7 @@
         {
             "language": "typescript",
             "source": [
-                "let hello='hello world';\r\nlet hi='hello world';\r\nconsole.log(hello===hi);    //true"
+                "// 값을 각각 선언하는 방식\r\nlet hello='hello world';\r\nlet hi='hello world';\r\nconsole.log(hello===hi);    //true"
             ],
             "outputs": [
                 {
@@ -137,6 +144,13 @@
                     ]
                 }
             ]
+        },
+        {
+            "language": "markdown",
+            "source": [
+                "#### 객체 - 변경 가능한 형태로 저장, 값을 복사할 때도 값이 아닌 참조를 전달"
+            ],
+            "outputs": []
         },
         {
             "language": "typescript",
