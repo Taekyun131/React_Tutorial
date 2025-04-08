@@ -151,7 +151,291 @@
         {
             "language": "typescript",
             "source": [
-                ""
+                "// 함수 표현식과 선언식의 차이\r\n// 호이스팅 - 실행 전에 함수를 미리 메모리에 등록하는 작업\r\nhello()     //hello\r\n\r\nfunction hello(){\r\n    console.log('hello')\r\n}\r\n\r\nhello()     //hello"
+            ],
+            "outputs": [
+                {
+                    "items": [
+                        {
+                            "mime": "application/vnd.code.notebook.stdout",
+                            "value": [
+                                "hello",
+                                "",
+                                ""
+                            ]
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "language": "typescript",
+            "source": [
+                "// 변수는 호이스팅이 되는 시점에 undefined로 초기화\r\nconsole.log(typeof hello1==='undefined') //true\r\n\r\nhello1()     //Uncaught TypeError: hello is not a function\r\n\r\nvar hello1 = function() {\r\n    console.log('hello')\r\n}\r\n\r\nhello1()"
+            ],
+            "outputs": [
+                {
+                    "items": [
+                        {
+                            "mime": "application/vnd.code.notebook.stdout",
+                            "value": [
+                                "true",
+                                "",
+                                ""
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "items": [
+                        {
+                            "mime": "application/vnd.code.notebook.error",
+                            "value": {
+                                "name": "TypeError",
+                                "message": "hello1 is not a function",
+                                "stack": "    at <Cell 12> [4, 0]\n    at <Cell 12> [9, 46]\n    at Script.runInContext (node:vm:149:12)\n    at Script.runInNewContext (node:vm:154:17)\n    at Object.runInNewContext (node:vm:310:38)\n    at C (c:\\Users\\신태균\\.vscode\\extensions\\donjayamanne.typescript-notebook-2.0.6\\out\\extension\\server\\index.js:2:113345)\n    at t.execCode (c:\\Users\\신태균\\.vscode\\extensions\\donjayamanne.typescript-notebook-2.0.6\\out\\extension\\server\\index.js:2:114312)\n    at k.<anonymous> (c:\\Users\\신태균\\.vscode\\extensions\\donjayamanne.typescript-notebook-2.0.6\\out\\extension\\server\\index.js:2:142156)\n    at k.emit (node:events:518:28)\n    at k.emit (node:domain:489:12)"
+                            }
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "language": "markdown",
+            "source": [
+                "#### Function 생성자"
+            ],
+            "outputs": []
+        },
+        {
+            "language": "typescript",
+            "source": [
+                "const add=new Function('a','b','return a+b')\r\n\r\nadd(10, 24)     //34"
+            ],
+            "outputs": [
+                {
+                    "items": [
+                        {
+                            "mime": "application/vnd.code.notebook.stdout",
+                            "value": [
+                                "",
+                                ""
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "items": [
+                        {
+                            "mime": "text/plain",
+                            "value": [
+                                "\u001b[33m34\u001b[39m"
+                            ]
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "language": "markdown",
+            "source": [
+                "#### 화살표 함수"
+            ],
+            "outputs": []
+        },
+        {
+            "language": "typescript",
+            "source": [
+                "const add=(a,b)=>{\r\n    return a+b\r\n}\r\n\r\nconst add=(a, b)=> a+b"
+            ],
+            "outputs": []
+        },
+        {
+            "language": "typescript",
+            "source": [
+                "// 화살표 함수에서는 constructor 사용 불가\r\nconst Car=(name)=>{\r\n    this.name=name\r\n}\r\n\r\n//Uncaught TypeError: Car is not a constructor\r\nconst myCar=new Car('하이')"
+            ],
+            "outputs": [
+                {
+                    "items": [
+                        {
+                            "mime": "application/vnd.code.notebook.stdout",
+                            "value": [
+                                "",
+                                ""
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "items": [
+                        {
+                            "mime": "application/vnd.code.notebook.error",
+                            "value": {
+                                "name": "TypeError",
+                                "message": "Car is not a constructor",
+                                "stack": "    at <Cell 17> [7, 0]\n    at <Cell 17> [7, 46]\n    at Script.runInContext (node:vm:149:12)\n    at Script.runInNewContext (node:vm:154:17)\n    at Object.runInNewContext (node:vm:310:38)\n    at C (c:\\Users\\신태균\\.vscode\\extensions\\donjayamanne.typescript-notebook-2.0.6\\out\\extension\\server\\index.js:2:113345)\n    at t.execCode (c:\\Users\\신태균\\.vscode\\extensions\\donjayamanne.typescript-notebook-2.0.6\\out\\extension\\server\\index.js:2:114312)\n    at k.<anonymous> (c:\\Users\\신태균\\.vscode\\extensions\\donjayamanne.typescript-notebook-2.0.6\\out\\extension\\server\\index.js:2:142156)\n    at k.emit (node:events:518:28)\n    at k.emit (node:domain:489:12)"
+                            }
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "language": "typescript",
+            "source": [
+                "// 화살표 함수에서는 arguments가 존재하지 않음\r\nfunction hello(){\r\n    console.log(arguments)\r\n}\r\n\r\n// Arguments(3) [1, 2, 3, callee: f, Symbol(Symbol.iterator): f]\r\nhello(1, 2, 3)\r\n\r\nconst hi= () =>{\r\n    console.log(arguments)\r\n}\r\n\r\n//Uncaught ReferenceError: arguments is not defined\r\nhi(1, 2, 3)"
+            ],
+            "outputs": [
+                {
+                    "items": [
+                        {
+                            "mime": "application/vnd.code.notebook.stdout",
+                            "value": [
+                                "[Arguments] { '0': 1, '1': 2, '2': 3 }",
+                                "",
+                                ""
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "items": [
+                        {
+                            "mime": "application/vnd.code.notebook.error",
+                            "value": {
+                                "name": "ReferenceError",
+                                "message": "arguments is not defined",
+                                "stack": "    at hi (<Cell 18> [10, 11])\n    at <Cell 18> [14, 2]\n    at <Cell 18> [11, 46]\n    at Script.runInContext (node:vm:149:12)\n    at Script.runInNewContext (node:vm:154:17)\n    at Object.runInNewContext (node:vm:310:38)\n    at C (c:\\Users\\신태균\\.vscode\\extensions\\donjayamanne.typescript-notebook-2.0.6\\out\\extension\\server\\index.js:2:113345)\n    at t.execCode (c:\\Users\\신태균\\.vscode\\extensions\\donjayamanne.typescript-notebook-2.0.6\\out\\extension\\server\\index.js:2:114312)\n    at k.<anonymous> (c:\\Users\\신태균\\.vscode\\extensions\\donjayamanne.typescript-notebook-2.0.6\\out\\extension\\server\\index.js:2:142156)\n    at k.emit (node:events:518:28)"
+                            }
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "language": "markdown",
+            "source": [
+                "### 3) 다양한 함수"
+            ],
+            "outputs": []
+        },
+        {
+            "language": "markdown",
+            "source": [
+                "#### 즉시 실행 함수"
+            ],
+            "outputs": []
+        },
+        {
+            "language": "typescript",
+            "source": [
+                "// 즉시 실행, 한 번만 호출되고 다시 호출 불가\r\n(function (a,b){\r\n    return a+b\r\n}) (10, 24)     //34"
+            ],
+            "outputs": [
+                {
+                    "items": [
+                        {
+                            "mime": "application/vnd.code.notebook.stdout",
+                            "value": [
+                                "",
+                                ""
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "items": [
+                        {
+                            "mime": "text/plain",
+                            "value": [
+                                "\u001b[33m34\u001b[39m"
+                            ]
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "language": "markdown",
+            "source": [
+                "### 고차함수"
+            ],
+            "outputs": []
+        },
+        {
+            "language": "typescript",
+            "source": [
+                "// 함수를 매개변수로 받는 함수\r\nconst doubleArray=[1, 2, 3].map((item)=>item*2)\r\n\r\ndoubleArray     //[2, 4, 6]"
+            ],
+            "outputs": [
+                {
+                    "items": [
+                        {
+                            "mime": "application/vnd.code.notebook.stdout",
+                            "value": [
+                                "",
+                                ""
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "items": [
+                        {
+                            "mime": "text/plain",
+                            "value": [
+                                "[",
+                                "  \u001b[33m2\u001b[39m,",
+                                "  \u001b[33m4\u001b[39m,",
+                                "  \u001b[33m6\u001b[39m",
+                                "]"
+                            ]
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "language": "typescript",
+            "source": [
+                "// 함수를 반환하는 고차함수\r\nconst add =function(a){\r\n    //a가 존재하는 클로저 생성\r\n    return function (b){\r\n        //b를 인수로 받아 두 합을 반환하는 또 다른 함수를 생성\r\n        return a+b\r\n    }\r\n}\r\n\r\nadd(1)(3)       //4"
+            ],
+            "outputs": [
+                {
+                    "items": [
+                        {
+                            "mime": "application/vnd.code.notebook.stdout",
+                            "value": [
+                                "",
+                                ""
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "items": [
+                        {
+                            "mime": "text/plain",
+                            "value": [
+                                "\u001b[33m4\u001b[39m"
+                            ]
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "language": "markdown",
+            "source": [
+                "### 4) 함수 생성 시 주의사항"
+            ],
+            "outputs": []
+        },
+        {
+            "language": "markdown",
+            "source": [
+                "#### 함수의 부수 효과를 최대한 억제\r\n#### 가능한 한 함수는 작게 \r\n#### 누구나 이해할 수 있는 이름"
             ],
             "outputs": []
         }
