@@ -1,0 +1,398 @@
+{
+    "cells": [
+        {
+            "language": "markdown",
+            "source": [
+                "## 3. 클래스"
+            ],
+            "outputs": []
+        },
+        {
+            "language": "markdown",
+            "source": [
+                "### 1) 클래스 - 필요한 데이터나 이를 조작하는 코드를 추상화해 객체생성을 편리하게 하는 일종의 템플릿"
+            ],
+            "outputs": []
+        },
+        {
+            "language": "typescript",
+            "source": [
+                "// Car 클래스 선언\r\nclass Car{\r\n    // constructor는 생성자\r\n    // 최초에 객체 생성 시 어떤 인수를 받을 지 결정가능하며, 객체를 초기화 하는 용도로 사용\r\n    constructor(name){\r\n        this.name=name\r\n    }\r\n\r\n    // 메서드\r\n    honk(){\r\n        console.log(`${this.name}이 경적을 울립니다!`)\r\n    }\r\n    \r\n    // 정적 메서드\r\n    static hello(){\r\n        console.log('저는 자동차입니다')\r\n    }\r\n\r\n    //setter\r\n    set age(value){\r\n        this.carAge=value\r\n    }\r\n\r\n    //getter\r\n    get age(){\r\n        return this.carAge\r\n    }\r\n}\r\n\r\n"
+            ],
+            "outputs": [
+                {
+                    "items": [
+                        {
+                            "mime": "application/vnd.code.notebook.stdout",
+                            "value": [
+                                "",
+                                ""
+                            ]
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "language": "typescript",
+            "source": [
+                "// Car 클래스를 활용해 car 객체를 생성\r\nconst myCar=new Car('자동차')\r\n\r\n// 메서드 호출\r\nmyCar.honk();\r\n\r\n// 정적 메서드는 클래스에서 직접 호출\r\nCar.hello()\r\n\r\n// 정적 메서드는 클래스로 만든 객체에서는 호출 불가\r\n// myCar.hello()   // Uncaught TypeError: myCar.hello is not a function\r\n\r\n// setter를 호출해 값을 할당\r\nmyCar.age=32\r\n\r\n// getter를 호출해 값 출력\r\nconsole.log(myCar.age, myCar.name)      // 32 자동차"
+            ],
+            "outputs": [
+                {
+                    "items": [
+                        {
+                            "mime": "application/vnd.code.notebook.stdout",
+                            "value": [
+                                "자동차이 경적을 울립니다!",
+                                "저는 자동차입니다",
+                                "32 자동차",
+                                "",
+                                ""
+                            ]
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "language": "markdown",
+            "source": [
+                "#### constructor(생성자)"
+            ],
+            "outputs": []
+        },
+        {
+            "language": "typescript",
+            "source": [
+                "// 생성자는 하나만 존재가능\r\nclass Car{\r\n    constructor(name){\r\n        this.name=name\r\n    }\r\n\r\n    //SyntaxError: A class may only have one constructor\r\n    constructor(name){\r\n        this.name=name\r\n    }\r\n}       // 불가능"
+            ],
+            "outputs": [
+                {
+                    "items": [
+                        {
+                            "mime": "application/vnd.code.notebook.error",
+                            "value": {
+                                "name": "Error",
+                                "message": "Failed to generate code object, \n    }\r\n    ^\n\nDuplicate constructor in the same class",
+                                "stack": ""
+                            }
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "language": "typescript",
+            "source": [
+                "// 생성자는 생략가능\r\nclass Car{\r\n\r\n}       // 가능"
+            ],
+            "outputs": [
+                {
+                    "items": [
+                        {
+                            "mime": "application/vnd.code.notebook.stdout",
+                            "value": [
+                                "",
+                                ""
+                            ]
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "language": "markdown",
+            "source": [
+                "#### 프로퍼티 - 인스턴스 생성 시 내부에 정의할 수 있는 속성값"
+            ],
+            "outputs": []
+        },
+        {
+            "language": "typescript",
+            "source": [
+                "class Car{\r\n    constructor(name){\r\n        // 값을 받으면 내부에 프로퍼티로 할당\r\n        this.name=name\r\n    }\r\n}\r\n\r\nconst myCar=new Car('자동차')   //프로퍼티 값을 넘겨줌"
+            ],
+            "outputs": [
+                {
+                    "items": [
+                        {
+                            "mime": "application/vnd.code.notebook.stdout",
+                            "value": [
+                                "",
+                                ""
+                            ]
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "language": "markdown",
+            "source": [
+                "#### getter와 setter"
+            ],
+            "outputs": []
+        },
+        {
+            "language": "typescript",
+            "source": [
+                "// getter\r\nclass Car{\r\n    constructor(name){\r\n        this.name=name\r\n    }\r\n\r\n    get firstCharacter(){\r\n        return this.name[0]\r\n    }\r\n}\r\n\r\nconst myCar=new Car('자동차')\r\nmyCar.firstCharacter    // 자"
+            ],
+            "outputs": [
+                {
+                    "items": [
+                        {
+                            "mime": "application/vnd.code.notebook.stdout",
+                            "value": [
+                                "",
+                                ""
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "items": [
+                        {
+                            "mime": "text/plain",
+                            "value": [
+                                "\u001b[32m'자'\u001b[39m"
+                            ]
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "language": "typescript",
+            "source": [
+                "// setter\r\nclass Car{\r\n    constructor(name){\r\n        this.name=name\r\n    }\r\n\r\n    get firstCharacter(){\r\n        return this.name[0]\r\n    }\r\n\r\n    set firstCharacter(char){\r\n        this.name=[char, ...this.name.slice(1)].join('')\r\n    }\r\n}\r\n\r\nconst myCar=new Car('자동차')\r\nconsole.log(myCar.firstCharacter)        // 자\r\n\r\n// '차'를 할당\r\nmyCar.firstCharacter='차'\r\nconsole.log(myCar.firstCharacter, myCar.name)"
+            ],
+            "outputs": [
+                {
+                    "items": [
+                        {
+                            "mime": "application/vnd.code.notebook.stdout",
+                            "value": [
+                                "자",
+                                "차 차동차",
+                                "",
+                                ""
+                            ]
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "language": "markdown",
+            "source": [
+                "#### 인스턴스 메서드 - 클래스 내부에 선언한 메서드"
+            ],
+            "outputs": []
+        },
+        {
+            "language": "typescript",
+            "source": [
+                "class Car{\r\n    constructor(name){\r\n        this.name=name\r\n    }\r\n\r\n    //인스턴스 메서드 정의\r\n    hello(){\r\n        console.log(`안녕하세요, ${this.name}입니다`)\r\n    }\r\n}"
+            ],
+            "outputs": [
+                {
+                    "items": [
+                        {
+                            "mime": "application/vnd.code.notebook.stdout",
+                            "value": [
+                                "",
+                                ""
+                            ]
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "language": "typescript",
+            "source": [
+                "const myCar=new Car('자동차')\r\nmyCar.hello()       // 안녕하세요, 자동차입니다"
+            ],
+            "outputs": [
+                {
+                    "items": [
+                        {
+                            "mime": "application/vnd.code.notebook.stdout",
+                            "value": [
+                                "안녕하세요, 자동차입니다",
+                                "",
+                                ""
+                            ]
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "language": "typescript",
+            "source": [
+                "const myCar=new Car('자동차')\r\nObject.getPrototypeOf(myCar)    //{constructor: f, hello: f}"
+            ],
+            "outputs": [
+                {
+                    "items": [
+                        {
+                            "mime": "application/vnd.code.notebook.stdout",
+                            "value": [
+                                "",
+                                ""
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "items": [
+                        {
+                            "mime": "text/plain",
+                            "value": [
+                                "{}"
+                            ]
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "language": "typescript",
+            "source": [
+                "Object.getPrototypeOf(myCar)===Car.prototype    //true"
+            ],
+            "outputs": [
+                {
+                    "items": [
+                        {
+                            "mime": "application/vnd.code.notebook.stdout",
+                            "value": [
+                                "",
+                                ""
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "items": [
+                        {
+                            "mime": "text/plain",
+                            "value": [
+                                "\u001b[33mtrue\u001b[39m"
+                            ]
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "language": "markdown",
+            "source": [
+                "#### 정적 메서드"
+            ],
+            "outputs": []
+        },
+        {
+            "language": "typescript",
+            "source": [
+                "// 정적 메서드는 인스턴스를 생성하지 않고도 사용가능, 여러 곳에서 재사용 가능\r\n\r\nclass Car{\r\n    static hello(){\r\n        console.log('안녕하세요!')\r\n    }\r\n}\r\n\r\nconst myCar=new Car()\r\n// myCar.hello()       // Uncaught TypeError: myCar.hello is not a function\r\nCar.hello()     // 안녕하세요!"
+            ],
+            "outputs": [
+                {
+                    "items": [
+                        {
+                            "mime": "application/vnd.code.notebook.stdout",
+                            "value": [
+                                "안녕하세요!",
+                                "",
+                                ""
+                            ]
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "language": "markdown",
+            "source": [
+                "#### 상속 - 기존 클래스를 상속받아 자식 클래스에서 확장하는 개념"
+            ],
+            "outputs": []
+        },
+        {
+            "language": "typescript",
+            "source": [
+                "class Car{\r\n    constructor(name){\r\n        this.name=name\r\n    }\r\n\r\n    honk(){\r\n        console.log(`${this.name} 경적을 울립니다`)\r\n    }\r\n}\r\n\r\nclass Truck extends Car{\r\n    constructor(name){\r\n        // 부모 클래스의 constructor, 즉 car의 constructor를 호출\r\n        super(name)\r\n    }\r\n\r\n    load(){\r\n        console.log('짐을 싣습니다')\r\n    }\r\n}\r\n\r\nconst myCar=new Car('자동차')\r\nconsole.log(myCar.honk())    // 자동차가 경적을 울립니다\r\n\r\nconst truck=new Truck('트럭')\r\nconsole.log(truck.honk())\r\nconsole.log(truck.load())"
+            ],
+            "outputs": [
+                {
+                    "items": [
+                        {
+                            "mime": "application/vnd.code.notebook.stdout",
+                            "value": [
+                                "자동차 경적을 울립니다",
+                                "undefined",
+                                "트럭 경적을 울립니다",
+                                "undefined",
+                                "짐을 싣습니다",
+                                "undefined",
+                                "",
+                                ""
+                            ]
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "language": "markdown",
+            "source": [
+                "### 2) 클래스와 함수의 관계"
+            ],
+            "outputs": []
+        },
+        {
+            "language": "javascript",
+            "source": [
+                "// 클래스 코드\r\nclass Car{\r\n    constructor(name){\r\n        this.name=name\r\n    }\r\n    honk(){\r\n        console.log(`${this.name}이 경적을 울립니다`)\r\n    }\r\n\r\n    static hello(){\r\n        console.log('저는 자동차입니다')\r\n    }\r\n\r\n    set age(value){\r\n        this.carAge=value\r\n    }\r\n\r\n    get age(){\r\n        return this.carAge\r\n    }\r\n\r\n}\r\n\r\n// 바벨로 변환한 결과\r\n'use strict'\r\n\r\n// 클래스가 함수처럼 호출되는 것을 방지\r\nfunction _classCallCheck(instance, Constructor){\r\n    if(!(instance instanceof Constructor)){\r\n        throw new TypeError('Cannot call a class as a function')\r\n    }\r\n}\r\n\r\n// 프로퍼티를 할당하는 코드\r\nfunction _defineProperties(target, props){\r\n    for(var i=0; i<props.length;i++){\r\n        var descriptor=pops[i]\r\n        descriptor.enumerable=descriptor.enumerable || false\r\n        descriptor.configurable=true\r\n        if('value' in descriptor) descriptor.writable=true\r\n        Object.defineProperty(target, descriptor.key, descriptor)\r\n    }\r\n}\r\n\r\n// 프로토타입 메서드와 정적 메서드를 선언하는 코드\r\nfunction _createClass(Constructor, protoProps, staticProps){\r\n    if(protoProps) _defineProperties(Constructor.prototype, protoProps)\r\n    if(staticProps) _defineProperties(Constructor, staticProps)\r\n    Object.defineProperty(Constructor, 'proototype', {writable: false})\r\n    return Constructor\r\n}\r\n\r\nvar Car=/*#__PURE__*/(function(){\r\n    function Car(name){\r\n        _classCallCheck(this, Car)\r\n        this.name=name\r\n    }\r\n\r\n    _createClass(\r\n        Car,\r\n        [\r\n            {\r\n                key: 'honk',\r\n                value: function honk(){\r\n                    console.log(\r\n                        ''.concat(\r\n                            this.name,\r\n                            '\\uC774 \\uACBD\\uC801\\uC744 \\uC6B8\\uB9BD\\uB2C8\\uB2E4!',\r\n                        ),\r\n                    )\r\n                },\r\n            },\r\n            {\r\n                key: 'age',\r\n                get: function get(){\r\n                    return this.carAge\r\n                },\r\n                set: function set(value){\r\n                    this.carAge=value\r\n                },\r\n            },\r\n        ],\r\n        [\r\n            {\r\n                key: 'hello',\r\n                value: function hello(){\r\n                    console.log('저는 자동차입니다')\r\n                },\r\n            },\r\n        ],\r\n    )\r\n    return Car\r\n}) ()"
+            ],
+            "outputs": [
+                {
+                    "items": [
+                        {
+                            "mime": "application/vnd.code.notebook.error",
+                            "value": {
+                                "name": "Error",
+                                "message": "Failed to generate code object, \n        _classCallCheck(this, Car);\r\n    ^\n\nIdentifier 'Car' has already been declared",
+                                "stack": ""
+                            }
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "language": "javascript",
+            "source": [
+                "// 위 코드를 보기 쉽게 변경\r\nvar Car=(function(){\r\n    function Car(name){\r\n        this.name=name\r\n    }\r\n\r\n    // 프로토타입 메서드. 실제로 프로토타입에 할당해야 프로토타입 메서드로 작동\r\n    Car.prototype.honk=function(){\r\n        console.log(`${this.name}이 경적을 울립니다`)\r\n    }\r\n\r\n    // 정적 메서드. 인스턴스 생성 없이 바로 호출가능\r\n    Car.hello()=function(){\r\n        console.log('저는 자동차입니다')\r\n    }\r\n\r\n    //Car 객체에 속성을 직접 정의\r\n    Object.defineProperty(Car, 'age',{\r\n        // get과 set은 각각 접근자, 설정자로 사용할 수 있는 예약어\r\n        //getter\r\n        get: function(){\r\n            return this.carAge\r\n        },\r\n        //setter\r\n        set: function(value){\r\n            this.carAge=value\r\n        },\r\n    })\r\n    return Car\r\n}) ()"
+            ],
+            "outputs": [
+                {
+                    "items": [
+                        {
+                            "mime": "application/vnd.code.notebook.error",
+                            "value": {
+                                "name": "Error",
+                                "message": "Failed to generate code object, \n    };\r\n    ^\n\nAssigning to rvalue",
+                                "stack": ""
+                            }
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}
